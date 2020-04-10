@@ -41,7 +41,11 @@ type
     SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure Label1Click(Sender: TObject);
+    procedure Memo1Change(Sender: TObject);
     procedure MenuItem11Click(Sender: TObject);
+    procedure MenuItem13Click(Sender: TObject);
+    procedure MenuItem14Click(Sender: TObject);
+    procedure MenuItem15Click(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem6Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
@@ -81,9 +85,29 @@ begin
 
 end;
 
+procedure TForm1.Memo1Change(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
   close;
+end;
+
+procedure TForm1.MenuItem13Click(Sender: TObject);
+begin
+  Memo1.CutToClipBoard;
+end;
+
+procedure TForm1.MenuItem14Click(Sender: TObject);
+begin
+  Memo1.CopyToClipboard;
+end;
+
+procedure TForm1.MenuItem15Click(Sender: TObject);
+begin
+  Memo1.PasteFromClipboard;
 end;
 
 procedure TForm1.MenuItem1Click(Sender: TObject);
