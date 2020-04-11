@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus,
-  ExtDlgs, ComCtrls, SynHighlighterPas, SynHighlighterCpp,
+  ExtDlgs, ComCtrls, ExtCtrls, SynHighlighterPas, SynHighlighterCpp,
   SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit, SynHighlighterAny;
 
 type
@@ -48,12 +48,15 @@ type
     Open_item: TOpenDialog;
     Replace_item: TReplaceDialog;
     Save_item: TSaveDialog;
+    StatusBar1: TStatusBar;
     Syn_Any: TSynAnySyn;
     SynEdit1: TSynEdit;
     Syn_Cpp: TSynCppSyn;
     Syn_CSS: TSynCssSyn;
     Syn_JS: TSynJScriptSyn;
-    procedure Menu_CloseClick(Sender: TObject);
+    Timer1: TTimer;
+    procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure Menu_CppClick(Sender: TObject);
     procedure Menu_CSSClick(Sender: TObject);
     procedure Menu_ExiteClick(Sender: TObject);
@@ -68,6 +71,17 @@ type
     procedure Menu_OpenClick(Sender: TObject);
     procedure Menu_SaveClick(Sender: TObject);
     procedure Menu_SaveAsClick(Sender: TObject);
+    procedure StatusBar1StartDrag(Sender: TObject; var DragObject: TDragObject);
+    procedure SynEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+      );
+    procedure SynEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure SynEdit1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Timer1StartTimer(Sender: TObject);
+    procedure Timer1StopTimer(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
 
   public
@@ -97,9 +111,14 @@ begin
   close;
 end;
 
-procedure TForm1.Menu_CloseClick(Sender: TObject);
+procedure TForm1.FormResize(Sender: TObject);
 begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY+1) + ':'+ IntToStr (SynEdit1.CaretX+1);
+end;
 
+procedure TForm1.FormShow(Sender: TObject);
+begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr (SynEdit1.CaretX);
 end;
 
 procedure TForm1.Menu_CppClick(Sender: TObject);
@@ -143,14 +162,6 @@ begin
   if Font_item.Execute then SynEdit1.Font:=Font_item.Font;
 end;
 
-//procedure TForm1.MenuItem23Click(Sender: TObject);
-//begin
-//  if MenuItem23.Checked=true then
-//    begin
-//      Form1.Memo1.Highlighter:=Syn_Cpp;
-//    end;
-//end;
-
 procedure TForm1.Menu_CreateClick(Sender: TObject);
 begin
   FileWork:='';
@@ -191,6 +202,51 @@ end;
 procedure TForm1.Menu_SaveAsClick(Sender: TObject);
 begin
   SaveAs;
+end;
+
+procedure TForm1.StatusBar1StartDrag(Sender: TObject;
+  var DragObject: TDragObject);
+begin
+
+end;
+
+procedure TForm1.SynEdit1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr (SynEdit1.CaretX);
+end;
+
+procedure TForm1.SynEdit1KeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr (SynEdit1.CaretX);
+end;
+
+procedure TForm1.SynEdit1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr (SynEdit1.CaretX);
+end;
+
+procedure TForm1.SynEdit1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr(SynEdit1.CaretX);
+end;
+
+procedure TForm1.Timer1StartTimer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
+end;
+
+procedure TForm1.Timer1StopTimer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
 end;
 
 

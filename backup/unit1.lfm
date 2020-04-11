@@ -1,17 +1,19 @@
 object Form1: TForm1
-  Left = 839
+  Left = 837
   Height = 567
-  Top = 244
+  Top = 258
   Width = 801
   Caption = 'Form1'
   ClientHeight = 547
   ClientWidth = 801
   Menu = MainMenu1
+  OnResize = FormResize
+  OnShow = FormShow
   LCLVersion = '2.0.6.0'
   inline SynEdit1: TSynEdit
     Cursor = crArrow
     Left = 0
-    Height = 547
+    Height = 524
     Top = 0
     Width = 801
     Align = alClient
@@ -23,6 +25,10 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
     TabOrder = 0
+    OnKeyDown = SynEdit1KeyDown
+    OnKeyUp = SynEdit1KeyUp
+    OnMouseDown = SynEdit1MouseDown
+    OnMouseUp = SynEdit1MouseUp
     Gutter.Width = 57
     Gutter.MouseActions = <>
     RightGutter.Width = 0
@@ -512,6 +518,21 @@ object Form1: TForm1
       end
     end
   end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 524
+    Width = 801
+    Panels = <    
+      item
+        Width = 100
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+    OnStartDrag = StatusBar1StartDrag
+  end
   object MainMenu1: TMainMenu
     left = 128
     top = 96
@@ -528,7 +549,6 @@ object Form1: TForm1
       end
       object Menu_Close: TMenuItem
         Caption = 'Закрыть'
-        OnClick = Menu_CloseClick
       end
       object Menu_Save: TMenuItem
         Caption = 'Сохранить'
