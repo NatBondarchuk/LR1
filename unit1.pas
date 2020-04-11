@@ -6,52 +6,68 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus,
-  ExtDlgs;
+  ExtDlgs, ComCtrls, SynHighlighterPas, SynHighlighterCpp,
+  SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit, SynHighlighterAny;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    FontDialog1: TFontDialog;
+    ComboBox1: TComboBox;
+    Find_item: TFindDialog;
+    Font_item: TFontDialog;
     MainMenu1: TMainMenu;
-    Memo1: TMemo;
-    MenuItem1: TMenuItem;
-    MenuItem10: TMenuItem;
-    MenuItem11: TMenuItem;
+    Menu_Cpp: TMenuItem;
+    Menu_JS: TMenuItem;
+    Menu_CSS: TMenuItem;
+    Menu_none: TMenuItem;
+    Menu_File: TMenuItem;
+    Menu_Close: TMenuItem;
+    Menu_Exite: TMenuItem;
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
-    MenuItem16: TMenuItem;
-    MenuItem17: TMenuItem;
-    MenuItem18: TMenuItem;
-    MenuItem19: TMenuItem;
-    MenuItem2: TMenuItem;
+    Menu_Font: TMenuItem;
+    Menu_Theme: TMenuItem;
+    Menu_Found: TMenuItem;
+    Menu_Replace: TMenuItem;
+    Menu_Edit: TMenuItem;
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
+    Menu_Syn: TMenuItem;
+    N1: TMenuItem;
+    Menu_View: TMenuItem;
+    Menu_Search: TMenuItem;
     MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
-    MenuItem8: TMenuItem;
-    MenuItem9: TMenuItem;
-    OpenDialog1: TOpenDialog;
-    SaveDialog1: TSaveDialog;
-    procedure FormCreate(Sender: TObject);
-    procedure Label1Click(Sender: TObject);
-    procedure Memo1Change(Sender: TObject);
-    procedure MenuItem11Click(Sender: TObject);
+    Menu_Create: TMenuItem;
+    Menu_Open: TMenuItem;
+    Menu_Save: TMenuItem;
+    Menu_SaveAs: TMenuItem;
+    Open_item: TOpenDialog;
+    Replace_item: TReplaceDialog;
+    Save_item: TSaveDialog;
+    Syn_Any: TSynAnySyn;
+    SynEdit1: TSynEdit;
+    Syn_Cpp: TSynCppSyn;
+    Syn_CSS: TSynCssSyn;
+    Syn_JS: TSynJScriptSyn;
+    procedure Menu_CloseClick(Sender: TObject);
+    procedure Menu_CppClick(Sender: TObject);
+    procedure Menu_CSSClick(Sender: TObject);
+    procedure Menu_ExiteClick(Sender: TObject);
     procedure MenuItem12Click(Sender: TObject);
     procedure MenuItem13Click(Sender: TObject);
     procedure MenuItem14Click(Sender: TObject);
     procedure MenuItem15Click(Sender: TObject);
-    procedure MenuItem1Click(Sender: TObject);
-    procedure MenuItem6Click(Sender: TObject);
-    procedure MenuItem7Click(Sender: TObject);
-    procedure MenuItem8Click(Sender: TObject);
-    procedure MenuItem9Click(Sender: TObject);
+    procedure Menu_FontClick(Sender: TObject);
+    procedure Menu_CreateClick(Sender: TObject);
+    procedure Menu_JSClick(Sender: TObject);
+    procedure Menu_noneClick(Sender: TObject);
+    procedure Menu_OpenClick(Sender: TObject);
+    procedure Menu_SaveClick(Sender: TObject);
+    procedure Menu_SaveAsClick(Sender: TObject);
   private
 
   public
@@ -67,84 +83,116 @@ implementation
 {$R *.lfm}
 Procedure SaveAs;
 begin
-  if form1.SaveDialog1.Execute then
+  if form1.Save_Item.Execute then
   begin
-    form1.memo1.Lines.SaveToFile(Form1.SaveDialog1.FileName);
-    FileWork:=Form1.SaveDialog1.FileName;
+    form1.SynEdit1.Lines.SaveToFile(Form1.Save_Item.FileName);
+    FileWork:=Form1.Save_Item.FileName;
   end;
 end;
 
 { TForm1 }
 
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.Label1Click(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.Memo1Change(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.MenuItem11Click(Sender: TObject);
+procedure TForm1.Menu_ExiteClick(Sender: TObject);
 begin
   close;
 end;
 
+procedure TForm1.Menu_CloseClick(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.Menu_CppClick(Sender: TObject);
+begin
+     if Menu_Cpp.Checked=true then
+    begin
+      Form1.SynEdit1.Highlighter:=Syn_Cpp;
+    end;
+end;
+
+procedure TForm1.Menu_CSSClick(Sender: TObject);
+begin
+    if Menu_CSS.Checked=true then
+    begin
+      Form1.SynEdit1.Highlighter:=Syn_CSS;
+    end;
+end;
+
 procedure TForm1.MenuItem12Click(Sender: TObject);
 begin
-  Memo1.SelectAll;
+  SynEdit1.SelectAll;
 end;
 
 procedure TForm1.MenuItem13Click(Sender: TObject);
 begin
-  Memo1.CutToClipBoard;
+  SynEdit1.CutToClipBoard;
 end;
 
 procedure TForm1.MenuItem14Click(Sender: TObject);
 begin
-  Memo1.CopyToClipboard;
+  SynEdit1.CopyToClipboard;
 end;
 
 procedure TForm1.MenuItem15Click(Sender: TObject);
 begin
-  Memo1.PasteFromClipboard;
+  SynEdit1.PasteFromClipboard;
 end;
 
-procedure TForm1.MenuItem1Click(Sender: TObject);
+procedure TForm1.Menu_FontClick(Sender: TObject);
 begin
-
+  if Font_item.Execute then SynEdit1.Font:=Font_item.Font;
 end;
 
-procedure TForm1.MenuItem6Click(Sender: TObject);
+//procedure TForm1.MenuItem23Click(Sender: TObject);
+//begin
+//  if MenuItem23.Checked=true then
+//    begin
+//      Form1.Memo1.Highlighter:=Syn_Cpp;
+//    end;
+//end;
+
+procedure TForm1.Menu_CreateClick(Sender: TObject);
 begin
   FileWork:='';
-  Memo1.Clear;
+  SynEdit1.Clear;
 end;
 
-procedure TForm1.MenuItem7Click(Sender: TObject);
+procedure TForm1.Menu_JSClick(Sender: TObject);
 begin
-  if OpenDialog1.Execute then
+  if Menu_JS.Checked=true then
+    begin
+      Form1.SynEdit1.Highlighter:=Syn_JS;
+    end;
+end;
+
+procedure TForm1.Menu_noneClick(Sender: TObject);
+begin
+  if Menu_none.Checked=true then
+    begin
+      Form1.SynEdit1.Highlighter:=Syn_Any;
+      Form1.SynEdit1.Font.Style:=[];
+    end;
+end;
+
+procedure TForm1.Menu_OpenClick(Sender: TObject);
+begin
+  if Open_item.Execute then
   begin
-    memo1.Lines.LoadFromFile(OpenDialog1.FileName);
-    FileWork:=OpenDialog1.FileName;
+    SynEdit1.Lines.LoadFromFile(Open_item.FileName);
+    FileWork:=Open_item.FileName;
   end;
 end;
 
-procedure TForm1.MenuItem8Click(Sender: TObject);
+procedure TForm1.Menu_SaveClick(Sender: TObject);
 begin
-  If FileWork='' then SaveAs else Memo1.Lines.SaveToFile(FileWork);
+  If FileWork='' then SaveAs else SynEdit1.Lines.SaveToFile(FileWork);
 end;
 
-procedure TForm1.MenuItem9Click(Sender: TObject);
+procedure TForm1.Menu_SaveAsClick(Sender: TObject);
 begin
   SaveAs;
 end;
+
 
 end.
 
