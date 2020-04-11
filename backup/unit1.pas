@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus,
-  ExtDlgs, ComCtrls, SynHighlighterPas, SynHighlighterCpp,
+  ExtDlgs, ComCtrls, ExtCtrls, SynHighlighterPas, SynHighlighterCpp,
   SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit, SynHighlighterAny;
 
 type
@@ -18,6 +18,9 @@ type
     Find_item: TFindDialog;
     Font_item: TFontDialog;
     MainMenu1: TMainMenu;
+    Theme_light: TMenuItem;
+    Theme_dark: TMenuItem;
+    Theme_standart: TMenuItem;
     Menu_Cpp: TMenuItem;
     Menu_JS: TMenuItem;
     Menu_CSS: TMenuItem;
@@ -54,6 +57,7 @@ type
     Syn_Cpp: TSynCppSyn;
     Syn_CSS: TSynCssSyn;
     Syn_JS: TSynJScriptSyn;
+    Timer1: TTimer;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Menu_CppClick(Sender: TObject);
@@ -68,9 +72,11 @@ type
     procedure Menu_JSClick(Sender: TObject);
     procedure Menu_noneClick(Sender: TObject);
     procedure Menu_OpenClick(Sender: TObject);
+    procedure Menu_ReplaceClick(Sender: TObject);
     procedure Menu_SaveClick(Sender: TObject);
     procedure Menu_SaveAsClick(Sender: TObject);
     procedure StatusBar1StartDrag(Sender: TObject; var DragObject: TDragObject);
+    procedure SynEdit1Change(Sender: TObject);
     procedure SynEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
     procedure SynEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -78,6 +84,14 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure SynEdit1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure SynEdit1StartDock(Sender: TObject; var DragObject: TDragDockObject
+      );
+    procedure Theme_darkClick(Sender: TObject);
+    procedure Theme_lightClick(Sender: TObject);
+    procedure Theme_standartClick(Sender: TObject);
+    procedure Timer1StartTimer(Sender: TObject);
+    procedure Timer1StopTimer(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
 
   public
@@ -115,7 +129,7 @@ end;
 procedure TForm1.FormShow(Sender: TObject);
 begin
   StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr (SynEdit1.CaretX);
-  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time ) + '  :';
+  SynEdit1.Text:='';
 end;
 
 procedure TForm1.Menu_CppClick(Sender: TObject);
@@ -191,6 +205,11 @@ begin
   end;
 end;
 
+procedure TForm1.Menu_ReplaceClick(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.Menu_SaveClick(Sender: TObject);
 begin
   If FileWork='' then SaveAs else SynEdit1.Lines.SaveToFile(FileWork);
@@ -203,6 +222,11 @@ end;
 
 procedure TForm1.StatusBar1StartDrag(Sender: TObject;
   var DragObject: TDragObject);
+begin
+
+end;
+
+procedure TForm1.SynEdit1Change(Sender: TObject);
 begin
 
 end;
@@ -229,6 +253,58 @@ procedure TForm1.SynEdit1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   StatusBar1.Panels[0].Text:=IntToStr(SynEdit1.CaretY)+':'+IntToStr(SynEdit1.CaretX);
+end;
+
+procedure TForm1.SynEdit1StartDock(Sender: TObject;
+  var DragObject: TDragDockObject);
+begin
+
+end;
+
+procedure TForm1.Theme_darkClick(Sender: TObject);
+begin
+     if Theme_dark.Checked=true then
+     begin
+          SynEdit1.Color:=clBlack;
+          SynEdit1.Font.Color:=clWhite;
+          SynEdit1.SelectedColor.Background:=clAqua;
+          SynEdit1.SelectedColor.Foreground:=clBlack;
+     end;
+end;
+
+procedure TForm1.Theme_lightClick(Sender: TObject);
+begin
+     if Theme_light.Checked=true then
+     begin
+          SynEdit1.Color:=clNavy ;
+          SynEdit1.Font.Color:=clLime;
+          SynEdit1.SelectedColor.Background:=clPurple;
+          SynEdit1.SelectedColor.Foreground:=clAqua;
+     end;
+end;
+
+procedure TForm1.Theme_standartClick(Sender: TObject);
+begin
+  if Theme_standart.Checked=true then
+     begin
+          SynEdit1.Color:=clDefault;
+          SynEdit1.Font.Color:=clDefault;
+     end;
+end;
+
+procedure TForm1.Timer1StartTimer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
+end;
+
+procedure TForm1.Timer1StopTimer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  StatusBar1.Panels[1].Text:=DateToStr( Date ) + ' ' + TimeToStr( Time );
 end;
 
 

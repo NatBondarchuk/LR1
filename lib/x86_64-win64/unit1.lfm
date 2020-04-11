@@ -1,9 +1,10 @@
 object Form1: TForm1
-  Left = 837
+  Left = 592
   Height = 567
-  Top = 258
+  Top = 244
   Width = 801
-  Caption = 'Form1'
+  Align = alBottom
+  Caption = 'ЛР 1 - Тектовый редактор'
   ClientHeight = 547
   ClientWidth = 801
   Menu = MainMenu1
@@ -17,7 +18,8 @@ object Form1: TForm1
     Top = 0
     Width = 801
     Align = alClient
-    Color = 16446187
+    Font.CharSet = HEBREW_CHARSET
+    Font.Color = clCaptionText
     Font.Height = -13
     Font.Name = 'Courier New'
     Font.Pitch = fpFixed
@@ -29,6 +31,7 @@ object Form1: TForm1
     OnKeyUp = SynEdit1KeyUp
     OnMouseDown = SynEdit1MouseDown
     OnMouseUp = SynEdit1MouseUp
+    OnStartDock = SynEdit1StartDock
     Gutter.Width = 57
     Gutter.MouseActions = <>
     RightGutter.Width = 0
@@ -463,7 +466,8 @@ object Form1: TForm1
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
     RightEdgeColor = clNone
     ScrollBars = ssAutoVertical
-    SelectedColor.Background = 2671890
+    SelectedColor.Background = clAqua
+    SelectedColor.Foreground = clInactiveCaptionText
     SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
     SelectedColor.FramePriority = 50
@@ -475,13 +479,15 @@ object Form1: TForm1
     BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
     BracketMatchColor.Style = [fsBold]
-    FoldedCodeColor.Background = clNone
+    FoldedCodeColor.Background = 4227327
     FoldedCodeColor.Foreground = clGray
-    FoldedCodeColor.FrameColor = clGray
+    FoldedCodeColor.FrameColor = clFuchsia
+    FoldedCodeColor.FrameStyle = slsDotted
     MouseLinkColor.Background = clNone
     MouseLinkColor.Foreground = clBlue
     LineHighlightColor.Background = clNone
     LineHighlightColor.Foreground = clNone
+    OnChange = SynEdit1Change
     inline SynLeftGutterPartList1: TSynGutterPartList
       object SynGutterMarks1: TSynGutterMarks
         Width = 24
@@ -523,6 +529,7 @@ object Form1: TForm1
     Height = 23
     Top = 524
     Width = 801
+    Color = clBtnFace
     Panels = <    
       item
         Width = 100
@@ -530,10 +537,12 @@ object Form1: TForm1
       item
         Width = 50
       end>
+    ParentColor = False
     SimplePanel = False
     OnStartDrag = StatusBar1StartDrag
   end
   object MainMenu1: TMainMenu
+    ParentBidiMode = False
     left = 128
     top = 96
     object Menu_File: TMenuItem
@@ -593,6 +602,26 @@ object Form1: TForm1
       end
       object Menu_Theme: TMenuItem
         Caption = 'Тема оформления'
+        object Theme_dark: TMenuItem
+          AutoCheck = True
+          Caption = 'Темная'
+          RadioItem = True
+          OnClick = Theme_darkClick
+        end
+        object Theme_light: TMenuItem
+          AutoCheck = True
+          Caption = 'Яркая'
+          RadioItem = True
+          OnClick = Theme_lightClick
+        end
+        object Theme_standart: TMenuItem
+          AutoCheck = True
+          Caption = 'Стандартная'
+          Checked = True
+          ImageIndex = 2
+          RadioItem = True
+          OnClick = Theme_standartClick
+        end
       end
       object Menu_Syn: TMenuItem
         Caption = 'Подсветка синтаксиса'
@@ -630,6 +659,7 @@ object Form1: TForm1
       end
       object Menu_Replace: TMenuItem
         Caption = 'Заменить'
+        OnClick = Menu_ReplaceClick
       end
     end
     object MenuItem5: TMenuItem
