@@ -58,6 +58,7 @@ type
     Syn_CSS: TSynCssSyn;
     Syn_JS: TSynJScriptSyn;
     Timer1: TTimer;
+    procedure Find_itemFind(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Menu_CppClick(Sender: TObject);
@@ -69,6 +70,7 @@ type
     procedure MenuItem15Click(Sender: TObject);
     procedure Menu_FontClick(Sender: TObject);
     procedure Menu_CreateClick(Sender: TObject);
+    procedure Menu_FoundClick(Sender: TObject);
     procedure Menu_JSClick(Sender: TObject);
     procedure Menu_noneClick(Sender: TObject);
     procedure Menu_OpenClick(Sender: TObject);
@@ -101,6 +103,7 @@ type
 var
   Form1: TForm1;
   FileWork: string;
+  SPos: integer;
 
 implementation
 
@@ -177,6 +180,50 @@ procedure TForm1.Menu_CreateClick(Sender: TObject);
 begin
   FileWork:='';
   SynEdit1.Clear;
+end;
+
+procedure TForm1.Menu_FoundClick(Sender: TObject);
+begin
+  {запоминание позиции курсора}
+  SPos := SynEdit1.SelStart;
+  with Find_Item do
+  begin
+    {начальное значение текста поиска —
+    текст, выделенный в Memo1}
+    FindText := SynEdit1.SelText;
+    {позиционирование окна диалога внизу Memo1}
+    Position := Point(Form1.Left, Form1.Top +
+    SynEdit1.Top + SynEdit1.Height);
+    {удаление из диалога кнопок «Вверх», «Вниз»,
+    «Только слово целиком»}
+    Options := Options + [frHideUpDown, frHideWholeWord];
+    {выполнение}
+    Execute;
+  end;
+end;
+
+procedure TForm1.Find_ItemFind(Sender: TObject);
+  begin
+  with Find_Item do
+  begin
+    if frMatchCase in Options
+       {поиск с учетом регистра}
+       then SynEdit1.SelStart := Pos(FindText, Copy(SynEdit1.Lines.Text, SPos + 1, Length(SynEdit1.Lines.Text))) + Spos
+       {поиск без учета регистра}
+       else SynEdit1.SelStart := Pos(AnsiLowerCase(FindText), AnsiLowerCase(Copy(SynEdit1.Lines.Text, SPos + 1, Length(SynEdit1.Lines.Text)))) + Spos;
+            if SynEdit1.SelStart >= Spos
+            then
+                begin
+                     {выделение найденного текста}
+                    Select(FindText);
+                     {изменение начальной позиции поиска}
+                    SPos := SynEdit1.SelStart + Length(FindText) + 1;
+                end
+            else
+                if MessageDlg('Текст "'+FindText+'" не найден. Продолжать диалог?', mtConfirmation, mbYesNoCancel, 0) <> mrYes
+                then CloseDialog;
+  end;
+  SynEdit1.SetFocus;
 end;
 
 procedure TForm1.Menu_JSClick(Sender: TObject);
@@ -279,7 +326,7 @@ begin
           SynEdit1.Color:=clNavy ;
           SynEdit1.Font.Color:=clLime;
           SynEdit1.SelectedColor.Background:=clPurple;
-          SynEdit1.SelectedColor.Foreground:=clAqua;
+          SynEdit1.SelectedColor.Foreground:=clWhite;
      end;
 end;
 

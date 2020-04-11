@@ -656,6 +656,7 @@ object Form1: TForm1
       Caption = 'Поиск'
       object Menu_Found: TMenuItem
         Caption = 'Найти'
+        OnClick = Menu_FoundClick
       end
       object Menu_Replace: TMenuItem
         Caption = 'Заменить'
@@ -690,6 +691,7 @@ object Form1: TForm1
   end
   object Find_item: TFindDialog
     Options = []
+    OnFind = Find_itemFind
     left = 312
     top = 96
   end
