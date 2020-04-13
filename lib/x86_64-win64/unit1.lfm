@@ -1,14 +1,13 @@
 object Form1: TForm1
-  Left = 592
+  Left = 732
   Height = 567
-  Top = 244
+  Top = 212
   Width = 801
   Align = alBottom
-  Caption = 'ЛР 1 - Тектовый редактор'
+  Caption = 'ЛР 1. Тектовый редактор'
   ClientHeight = 547
   ClientWidth = 801
   Menu = MainMenu1
-  OnResize = FormResize
   OnShow = FormShow
   LCLVersion = '2.0.6.0'
   inline SynEdit1: TSynEdit
@@ -29,9 +28,6 @@ object Form1: TForm1
     TabOrder = 0
     OnKeyDown = SynEdit1KeyDown
     OnKeyUp = SynEdit1KeyUp
-    OnMouseDown = SynEdit1MouseDown
-    OnMouseUp = SynEdit1MouseUp
-    OnStartDock = SynEdit1StartDock
     Gutter.Width = 57
     Gutter.MouseActions = <>
     RightGutter.Width = 0
@@ -466,8 +462,6 @@ object Form1: TForm1
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
     RightEdgeColor = clNone
     ScrollBars = ssAutoVertical
-    SelectedColor.Background = clAqua
-    SelectedColor.Foreground = clInactiveCaptionText
     SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
     SelectedColor.FramePriority = 50
@@ -487,7 +481,6 @@ object Form1: TForm1
     MouseLinkColor.Foreground = clBlue
     LineHighlightColor.Background = clNone
     LineHighlightColor.Foreground = clNone
-    OnChange = SynEdit1Change
     inline SynLeftGutterPartList1: TSynGutterPartList
       object SynGutterMarks1: TSynGutterMarks
         Width = 24
@@ -539,7 +532,6 @@ object Form1: TForm1
       end>
     ParentColor = False
     SimplePanel = False
-    OnStartDrag = StatusBar1StartDrag
   end
   object MainMenu1: TMainMenu
     ParentBidiMode = False
@@ -558,6 +550,7 @@ object Form1: TForm1
       end
       object Menu_Close: TMenuItem
         Caption = 'Закрыть'
+        OnClick = Menu_CloseClick
       end
       object Menu_Save: TMenuItem
         Caption = 'Сохранить'
@@ -690,30 +683,48 @@ object Form1: TForm1
     top = 96
   end
   object Find_item: TFindDialog
-    Options = []
+    Options = [frHideWholeWord, frHideUpDown, frHideEntireScope]
     OnFind = Find_itemFind
     left = 312
     top = 96
   end
   object Replace_item: TReplaceDialog
-    Options = [frDown, frReplace, frReplaceAll, frHidePromptOnReplace]
+    Options = [frDown, frHideWholeWord, frHideUpDown, frReplace, frReplaceAll, frHideEntireScope, frHidePromptOnReplace]
+    OnFind = Replace_itemFind
+    OnReplace = Replace_itemReplace
     left = 312
     top = 184
   end
   object Syn_Cpp: TSynCppSyn
     DefaultFilter = 'Файлы C++ (*.c,*.cpp,*.h,*.hpp,*.hh)|*.c;*.cpp;*.h;*.hpp;*.hh'
     Enabled = False
+    AsmAttri.Foreground = clYellow
+    CommentAttri.Foreground = clGray
+    DirecAttri.Foreground = clGray
+    InvalidAttri.Foreground = clYellow
+    KeyAttri.Foreground = 8388863
+    NumberAttri.Foreground = clLime
+    SpaceAttri.Foreground = clAqua
+    StringAttri.Foreground = clRed
+    SymbolAttri.Style = [fsBold]
     left = 408
     top = 184
   end
   object Syn_JS: TSynJScriptSyn
     Enabled = False
+    CommentAttri.Foreground = clHighlight
+    KeyAttri.Foreground = 33023
+    EventAttri.Foreground = clPurple
+    StringAttri.Foreground = 50688
+    StringAttri.Style = [fsBold]
     left = 408
     top = 272
   end
   object Syn_CSS: TSynCssSyn
     DefaultFilter = 'Каскадированные таблицы стилей (*.css)|*.css'
     Enabled = False
+    CommentAttri.Foreground = clHighlight
+    IdentifierAttri.Foreground = clFuchsia
     left = 408
     top = 96
   end
@@ -737,8 +748,6 @@ object Form1: TForm1
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    OnStartTimer = Timer1StartTimer
-    OnStopTimer = Timer1StopTimer
     left = 312
     top = 272
   end
