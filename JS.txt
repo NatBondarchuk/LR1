@@ -1,0 +1,11 @@
+function getFirstName() {
+    var firstName = document.querySelector("#firstName").value;
+    firstName = firstName.toLowerCase();
+    setCookie("firstName", firstName);
+    if (firstName === null) {
+        return "";
+    }
+    return firstName;
+}
+ 
+var activeFirstName = getFirstName();

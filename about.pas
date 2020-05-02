@@ -17,7 +17,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Memo1: TMemo;
-    Panel1: TPanel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -39,12 +38,13 @@ procedure TForm_About.BitBtn1Click(Sender: TObject);
 begin
     Close;
 end;
-
 procedure TForm_About.FormShow(Sender: TObject);
 begin
-  Label1.Caption := 'ЛР1. Простой текстовый редактор';
-  Label2.Caption := 'Автор: Бондарчук Наталья, 4ПМИ';
-  Memo1.Caption := '...';
+  Label1.Caption := 'ЛР1. Простой текстовый' + #10 + 'редактор, v. 1.0';
+  Label2.Caption := '© Бондарчук Н., 4ПМИ';
+  Memo1.Caption := 'Программа для создания и редактирования файлов в формате .txt.'
+                   + 'Реализованы следующие требования: цветная подсветка синтаксиса трёх языков программирования (CSS, JS, C++), '
+                   + 'три темы оформления, возможность поиска и замены слова в тексте (чувствительно к регистру).';
 end;
 
 end.

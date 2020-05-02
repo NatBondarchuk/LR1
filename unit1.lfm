@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 609
+  Left = 707
   Height = 567
-  Top = 384
+  Top = 356
   Width = 801
   Align = alBottom
   Caption = 'ЛР 1. Тектовый редактор'
@@ -667,6 +667,22 @@ object Form1: TForm1
         OnClick = Menu_About_prClick
       end
     end
+    object Menu_Lang: TMenuItem
+      Caption = 'Язык/Language'
+      object Menu_RU: TMenuItem
+        AutoCheck = True
+        Caption = 'Русский'
+        Checked = True
+        RadioItem = True
+        OnClick = Menu_RUClick
+      end
+      object Menu_EN: TMenuItem
+        AutoCheck = True
+        Caption = 'English'
+        RadioItem = True
+        OnClick = Menu_ENClick
+      end
+    end
   end
   object Open_item: TOpenDialog
     Filter = 'Текстовый документ|*.txt|Все|*.'
@@ -752,5 +768,21 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     left = 312
     top = 272
+  end
+  object Process1: TProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 312
+    top = 360
   end
 end

@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 732
+  Left = 707
   Height = 567
-  Top = 212
+  Top = 356
   Width = 801
   Align = alBottom
   Caption = 'ЛР 1. Тектовый редактор'
@@ -656,13 +656,31 @@ object Form1: TForm1
         OnClick = Menu_ReplaceClick
       end
     end
-    object MenuItem5: TMenuItem
+    object Menu_About: TMenuItem
       Caption = 'Справка'
-      object MenuItem20: TMenuItem
+      object Menu_Ref: TMenuItem
         Caption = 'Справка'
+        OnClick = Menu_RefClick
       end
-      object MenuItem21: TMenuItem
+      object Menu_About_pr: TMenuItem
         Caption = 'О программе'
+        OnClick = Menu_About_prClick
+      end
+    end
+    object Menu_Lang: TMenuItem
+      Caption = 'Язык/Language'
+      object Menu_RU: TMenuItem
+        AutoCheck = True
+        Caption = 'Русский'
+        Checked = True
+        RadioItem = True
+        OnClick = Menu_RUClick
+      end
+      object Menu_EN: TMenuItem
+        AutoCheck = True
+        Caption = 'English'
+        RadioItem = True
+        OnClick = Menu_ENClick
       end
     end
   end
@@ -750,5 +768,21 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     left = 312
     top = 272
+  end
+  object Process1: TProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 312
+    top = 360
   end
 end

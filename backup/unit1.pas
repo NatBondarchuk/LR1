@@ -5,9 +5,10 @@ unit unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus,
-  ExtDlgs, ComCtrls, ExtCtrls, SynHighlighterPas, SynHighlighterCpp,
-  SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit, SynHighlighterAny;
+  Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Menus, ExtDlgs, ComCtrls, ExtCtrls, SynHighlighterPas, SynHighlighterCpp,
+  About, SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit,
+  SynHighlighterAny;
 
 type
 
@@ -18,6 +19,10 @@ type
     Find_item: TFindDialog;
     Font_item: TFontDialog;
     MainMenu1: TMainMenu;
+    Menu_Lang: TMenuItem;
+    Menu_RU: TMenuItem;
+    Menu_EN: TMenuItem;
+    Process1: TProcess;
     Theme_light: TMenuItem;
     Theme_dark: TMenuItem;
     Theme_standart: TMenuItem;
@@ -60,6 +65,7 @@ type
     Timer1: TTimer;
     procedure Find_itemFind(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Menu_ENClick(Sender: TObject);
     procedure Menu_RefClick(Sender: TObject);
     procedure Menu_About_prClick(Sender: TObject);
     procedure Menu_CloseClick(Sender: TObject);
@@ -77,6 +83,7 @@ type
     procedure Menu_noneClick(Sender: TObject);
     procedure Menu_OpenClick(Sender: TObject);
     procedure Menu_ReplaceClick(Sender: TObject);
+    procedure Menu_RUClick(Sender: TObject);
     procedure Menu_SaveClick(Sender: TObject);
     procedure Menu_SaveAsClick(Sender: TObject);
     procedure Replace_itemFind(Sender: TObject);
@@ -99,7 +106,6 @@ type
   end;
 
 var
-  Form_About: TForm_About;
   Form1: TForm1;
   FileWork: string;
   SPos: integer;
@@ -389,6 +395,84 @@ end;
 procedure TForm1.Menu_About_prClick(Sender: TObject);
 begin
    Form_About.ShowModal;
+end;
+//Язык интерфейса
+procedure TForm1.Menu_RUClick(Sender: TObject);
+begin
+  if Menu_RU.Checked=true then
+    begin
+      Menu_File.Caption := 'Файл';
+      Menu_Edit.Caption := 'Правка';
+      Menu_View.Caption := 'Вид';
+      Menu_Search.Caption := 'Поиск';
+      Menu_About.Caption := 'Справка';
+      Menu_Lang.Caption := 'Язык/Language';
+
+      Menu_Create.Caption := 'Создать';
+      Menu_Open.Caption := 'Открыть';
+      Menu_Close.Caption := 'Закрыть';
+      Menu_Save.Caption := 'Сохранить';
+      Menu_SaveAs.Caption := 'Сохранить как...';
+      Menu_Exite.Caption := 'Выход';
+
+      MenuItem12.Caption := 'Выделить всё';
+      MenuItem13.Caption := 'CВырезать';
+      MenuItem14.Caption := 'Копировать';
+      MenuItem15.Caption := 'Выставить';
+
+      Menu_Font.Caption := 'Шрифт';
+      Menu_Theme.Caption := 'Тема оформления';
+      Theme_dark.Caption := 'Темная';
+      Theme_light.Caption := 'Яркая';
+      Theme_standart.Caption := 'Стндартная';
+      Menu_Syn.Caption := 'Подсветка синтаксиса';
+      Menu_none.Caption := 'нет';
+
+      Menu_Found.Caption := 'Найти';
+      Menu_Replace.Caption := 'Заменить';
+
+      Menu_Ref.Caption := 'Справка';
+      Menu_About_pr.Caption := 'О программе';
+    end
+end;
+//English
+procedure TForm1.Menu_ENClick(Sender: TObject);
+begin
+  if Menu_EN.Checked=true then
+    begin
+      Menu_File.Caption := 'File';
+      Menu_Edit.Caption := 'Edit';
+      Menu_View.Caption := 'View';
+      Menu_Search.Caption := 'Search';
+      Menu_About.Caption := 'Help';
+      Menu_Lang.Caption := 'Language|Язык';
+
+      Menu_Create.Caption := 'New';
+      Menu_Open.Caption := 'Open';
+      Menu_Close.Caption := 'Close';
+      Menu_Save.Caption := 'Save';
+      Menu_SaveAs.Caption := 'Save as...';
+      Menu_Exite.Caption := 'Exit';
+
+      MenuItem12.Caption := 'Select all';
+      MenuItem13.Caption := 'Cut';
+      MenuItem14.Caption := 'Copy';
+      MenuItem15.Caption := 'Paste';
+
+      Menu_Font.Caption := 'Font';
+      Menu_Theme.Caption := 'Themes';
+      Theme_dark.Caption := 'Dark';
+      Theme_light.Caption := 'Light';
+      Theme_standart.Caption := 'Standart';
+      Menu_Syn.Caption := 'Syntax highlighting';
+      Menu_none.Caption := 'none';
+
+      Menu_Found.Caption := 'Find';
+      Menu_Replace.Caption := 'Replace';
+
+      Menu_Ref.Caption := 'Reference';
+      Menu_About_pr.Caption := 'About program';
+    end
 end;
 end.
 
