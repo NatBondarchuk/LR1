@@ -1,0 +1,61 @@
+object FrmHelp: TFrmHelp
+  Left = 761
+  Height = 450
+  Top = 387
+  Width = 624
+  Align = alClient
+  BorderStyle = bsDialog
+  Caption = 'Справка'
+  ClientHeight = 450
+  ClientWidth = 624
+  OnCreate = FormCreate
+  LCLVersion = '2.0.6.0'
+  Scaled = False
+  object helpClose: TBitBtn
+    Left = 520
+    Height = 26
+    Top = 408
+    Width = 92
+    AutoSize = True
+    Color = clGreen
+    DefaultCaption = True
+    Kind = bkClose
+    ModalResult = 11
+    TabOrder = 0
+  end
+  object Memo1: TMemo
+    Left = 16
+    Height = 314
+    Top = 80
+    Width = 596
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Cambria'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsItalic]
+    Lines.Strings = (
+      'Memo1'
+    )
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 23
+    Height = 28
+    Top = 24
+    Width = 559
+    Caption = 'Справка о программе ЛР1. Текстовый редактор'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -24
+    Font.Name = 'Cambria'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold, fsItalic]
+    ParentColor = False
+    ParentFont = False
+  end
+end

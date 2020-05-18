@@ -445,7 +445,7 @@ begin
       Menu_View.Caption := 'View';
       Menu_Search.Caption := 'Search';
       Menu_About.Caption := 'Help';
-      Menu_Lang.Caption := 'Language|Язык';
+      Menu_Lang.Caption := 'Language/Язык';
 
       Menu_Create.Caption := 'New';
       Menu_Open.Caption := 'Open';

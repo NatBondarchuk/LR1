@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 707
+  Left = 518
   Height = 567
-  Top = 356
+  Top = 175
   Width = 801
   Align = alBottom
   Caption = 'ЛР 1. Тектовый редактор'

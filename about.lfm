@@ -1,7 +1,7 @@
 object Form_About: TForm_About
-  Left = 894
+  Left = 1314
   Height = 365
-  Top = 411
+  Top = 251
   Width = 397
   BorderStyle = bsDialog
   Caption = 'О программе'

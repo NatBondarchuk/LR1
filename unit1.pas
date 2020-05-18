@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Menus, ExtDlgs, ComCtrls, ExtCtrls, SynHighlighterPas, SynHighlighterCpp,
   About, SynHighlighterJScript, SynHighlighterCss, SynMemo, SynEdit,
-  SynHighlighterAny;
+  SynHighlighterAny, Help;
 
 type
 
@@ -389,7 +389,7 @@ end;
 //Справка
 procedure TForm1.Menu_RefClick(Sender: TObject);
 begin
-
+   FrmHelp.ShowModal;
 end;
 //О программе
 procedure TForm1.Menu_About_prClick(Sender: TObject);
